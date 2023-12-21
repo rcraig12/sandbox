@@ -19,6 +19,17 @@ type erc20token struct {
 
 type exchange struct {
 	name string
+	address string
 	factoryABI string
 	pairABI string
+}
+
+type liquiditypool struct {
+	token string
+	pair string
+	token0 string
+	reserve0 *big.Int
+	token1 string
+	reserve1 *big.Int
+	BlockTimestampLast uint32
 }

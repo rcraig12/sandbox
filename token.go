@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"math"
 	"math/big"
 	"os"
 	"strings"
@@ -185,22 +184,7 @@ func getTokenTotalSupply(client *ethclient.Client, tokenAddress common.Address) 
 	return totalSupply, nil
 }
 
-func outputTokenDetail(token *erc20token) {
-	ftotalSupply := new(big.Float)
-	ftotalSupply.SetString(token.totalsupply.String())
-
-	// Use token's decimals for the division
-	divisor := math.Pow10(int(token.decimals))
-	totalSupply := new(big.Float).Quo(ftotalSupply, big.NewFloat(divisor))
-
-	// Convert totalSupply to string with desired precision
-	// The 'f' format is for floating-point number, and -1 uses the smallest number of digits necessary
-	totalSupplyStr := totalSupply.Text('f', -1)
-
-	fmt.Printf("Contract: %s\nName: %s\nSymbol: %s\nSupply: %v\nDecimals: %d\n", token.contract, token.name, token.symbol, totalSupplyStr, token.decimals)
-}
-
-func newToken( contract string, provider *provider) *erc20token {
+func SetToken( contract string, provider *provider) *erc20token {
 	erc20 := erc20token{ contract: contract}
 
 	client, err := ethclient.Dial(provider.url)
