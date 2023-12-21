@@ -16,3 +16,9 @@ type erc20token struct {
 	totalsupply *big.Int
 	decimals uint8
 }
+
+type exchange struct {
+	name string
+	factoryABI string
+	pairABI string
+}
